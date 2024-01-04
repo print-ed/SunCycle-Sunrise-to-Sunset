@@ -1,5 +1,5 @@
-import { fetchSunriseSunsetData } from "./api.js";
-import { getCoordinatesFromAddress } from "./api.js";
+import { fetchSunriseSunsetData } from "./api/sunriseSunsetData.js";
+import { getCoordinatesFromAddress } from "./api/geocoding.js";
 
 document.getElementById("searchButton").addEventListener("click", () => {
   const address = document.getElementById("addressInput").value;
