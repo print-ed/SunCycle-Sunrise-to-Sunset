@@ -1,4 +1,6 @@
 // Make an API call to https://api.sunrisesunset.io
+// TODO: add more error handling
+// TODO: hide api key
 export async function fetchSunriseSunsetData(lat, lng) {
     try {
       const response = await fetch(
