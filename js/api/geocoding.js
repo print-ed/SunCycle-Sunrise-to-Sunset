@@ -1,5 +1,6 @@
 // Make an API call to https://api.geocodify.com
 // TODO: add more error handling
+// TODO: hide api key
 export async function getCoordinatesFromAddress(address) {
   try {
     const response = await fetch(
