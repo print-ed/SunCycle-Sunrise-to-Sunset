@@ -15,6 +15,7 @@ searchButton.addEventListener("click", handleSearch);
 async function handleSearch() {
   const address = addressInput.value;
 
+  // If the address is empty, display an error message and return
   if (!address || address.trim().length === 0) {
     return displayError("Please enter a valid address.");
   }
@@ -29,6 +30,7 @@ async function handleSearch() {
   }
 }
 
+// Display the sunrise and sunset times
 function displaySunriseSunsetData(data) {
   if (data.results.sunrise && data.results.sunset) {
     sunriseTime.textContent = data.results.sunrise;
