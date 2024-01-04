@@ -1,5 +1,4 @@
 // Make an API call to https://api.sunrisesunset.io
-// TODO: add more error handling
 // TODO: hide api key
 // TODO: check UTC offset
 export async function fetchSunriseSunsetData(lat, lng) {
@@ -13,11 +12,11 @@ export async function fetchSunriseSunsetData(lat, lng) {
       } else {
         // Get data from the response and return it
         const data = await response.json();
-        // TODO: remove console.log
-        console.log("Sunrise-sunset API response:", data);
+        // console.log("Sunrise-sunset API response:", data);
         return data;
       }
     } catch (error) {
-      console.log("There was an error!", error);
+      // console.error("There was an error!", error);
+      throw new Error("There was an error fetching sunrise and sunset data.");
     }
   }

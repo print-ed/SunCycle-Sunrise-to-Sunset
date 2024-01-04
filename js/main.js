@@ -1,5 +1,6 @@
 import { fetchSunriseSunsetData } from "./api/sunriseSunsetData.js";
 import { getCoordinatesFromAddress } from "./api/geocoding.js";
+import { displayError, handleAPIError } from "./errorHandlers.js";
 
 // Get the DOM elements
 const addressInput = document.getElementById("addressInput");
@@ -13,13 +14,18 @@ searchButton.addEventListener("click", handleSearch);
 
 async function handleSearch() {
   const address = addressInput.value;
+
+  if (!address || address.trim().length === 0) {
+    return displayError("Please enter a valid address.");
+  }
+
   try {
-    const { lat, lng, locationOutput } = await getCoordinatesFromAddress(address);
-    output.textContent = locationOutput;
-    const data = await fetchSunriseSunsetData(lat, lng);
+    const coordinates = await getCoordinatesFromAddress(address);
+    output.textContent = coordinates.locationOutput;
+    const data = await fetchSunriseSunsetData(coordinates.lat, coordinates.lng);
     displaySunriseSunsetData(data);
   } catch (error) {
-    handleAPIError(error);
+    handleAPIError(error.message);
   }
 }
 
@@ -30,15 +36,4 @@ function displaySunriseSunsetData(data) {
   } else {
     displayError("No sunrise and sunset data available for this location.");
   }
-}
-
-function displayError(message) {
-  sunriseTime.textContent = "";
-  sunsetTime.textContent = "";
-  output.textContent = message;
-}
-
-function handleAPIError(error) {
-  console.error("API Error:", error);
-  displayError("An error occurred while fetching data. Please try again later.");
 }

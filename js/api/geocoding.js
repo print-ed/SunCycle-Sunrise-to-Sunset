@@ -1,30 +1,34 @@
 // Make an API call to https://api.geocodify.com
-// TODO: add more error handling
 // TODO: hide api key
 export async function getCoordinatesFromAddress(address) {
   try {
     const response = await fetch(
-      // Replace with your Geocodify API key
       `https://api.geocodify.com/v2/geocode?api_key=txmifcC2HNA6iah4cXCbbiYAbtEDKT9Z&q=${encodeURIComponent(
         address
       )}`
     );
+
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    } else {
-      // Get data from the response and coordinates from the data
-      const data = await response.json();
-      // TODO: remove console.log
-      console.log("Geocodify API response:", data);
+      throw new Error(`Geocoding API error: HTTP status ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (
+      data.response &&
+      data.response.features.length > 0
+    ) {
       const coordinates = data.response.features[0].geometry.coordinates;
-      // Return the coordinates and location output
       return {
         lat: coordinates[1],
         lng: coordinates[0],
         locationOutput: data.response.features[0].properties.label,
       };
+    } else {
+      throw new Error("No coordinates found for the given address.");
     }
   } catch (error) {
-    console.error("Error fetching coordinates:", error);
+    // console.error("Error fetching coordinates:", error);
+    throw new Error(error.message);
   }
 }
