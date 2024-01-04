@@ -25,7 +25,7 @@ async function handleSearch() {
     const data = await fetchSunriseSunsetData(coordinates.lat, coordinates.lng);
     displaySunriseSunsetData(data);
   } catch (error) {
-    handleAPIError(error.message);
+    handleAPIError(error, displayError);
   }
 }
 

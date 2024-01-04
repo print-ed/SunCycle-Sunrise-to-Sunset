@@ -1,37 +1,32 @@
-export function handleAPIError(error) {
+const ErrorMessages = {
+  "Address not found": "The provided address could not be located.",
+  "Geocoding API error": "There was a problem with the address lookup service.",
+  "Sunrise-sunset API error": "Unable to retrieve sunrise and sunset times.",
+  "No coordinates found for the given address.":
+    "No coordinates found for the given address.",
+};
+
+export function handleAPIError(error, errorCallback) {
   console.error("API Error:", error);
 
-  let errorMessage;
+  let errorMessage = getErrorMessage(error);
+  let userFriendlyMessage = ErrorMessages[errorMessage] || errorMessage;
 
+  if (errorCallback && typeof errorCallback === "function") {
+    errorCallback(userFriendlyMessage);
+  } else {
+    console.warn("No error callback provided to handleAPIError");
+  }
+}
+
+function getErrorMessage(error) {
   if (error instanceof Error) {
-    // Standard Error object with message property
-    errorMessage = error.message;
+    return error.message;
   } else if (typeof error === "string") {
-    // Error is just a string
-    errorMessage = error;
+    return error;
   } else {
-    // Unknown error format
-    errorMessage = "An unexpected error occurred. Please try again.";
+    return "An unexpected error occurred. Please try again.";
   }
-
-  let userFriendlyMessage;
-
-  if (errorMessage.includes("Address not found")) {
-    userFriendlyMessage = "The provided address could not be located.";
-  } else if (errorMessage.includes("Geocoding API error")) {
-    userFriendlyMessage =
-      "There was a problem with the address lookup service.";
-  } else if (errorMessage.includes("Sunrise-sunset API error")) {
-    userFriendlyMessage = "Unable to retrieve sunrise and sunset times.";
-  } else if (
-    errorMessage.includes("No coordinates found for the given address.")
-  ) {
-    userFriendlyMessage = "No coordinates found for the given address.";
-  } else {
-    userFriendlyMessage = errorMessage;
-  }
-
-  displayError(userFriendlyMessage);
 }
 
 export function displayError(message) {
