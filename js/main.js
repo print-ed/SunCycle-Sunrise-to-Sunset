@@ -29,11 +29,11 @@ document.getElementById("searchButton").addEventListener("click", () => {
 
 // Function to display sunrise and sunset data
 function displaySunriseSunsetData(data) {
-  if (data.results) {
+  if (data.results.sunrise && data.results.sunset) {
     document.getElementById("sunriseTime").textContent = data.results.sunrise;
     document.getElementById("sunsetTime").textContent = data.results.sunset;
   } else {
-    displayError("No sunrise and sunset data available.");
+    displayError("no data available on said location.");
   }
 }
 
