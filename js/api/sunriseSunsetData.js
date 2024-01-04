@@ -12,6 +12,8 @@ export async function fetchSunriseSunsetData(lat, lng) {
       } else {
         // Get data from the response and return it
         const data = await response.json();
+        // TODO: remove console.log
+        console.log("Sunrise-sunset API response:", data);
         return data;
       }
     } catch (error) {
