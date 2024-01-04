@@ -1,5 +1,5 @@
 // Make an API call to https://api.geocodify.com
-// TODO: hide api key
+// TODO: hide api key and replace the existing that was pushed to github
 export async function getCoordinatesFromAddress(address) {
   try {
     const response = await fetch(
