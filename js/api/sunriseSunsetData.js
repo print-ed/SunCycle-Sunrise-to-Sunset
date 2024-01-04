@@ -1,6 +1,7 @@
 // Make an API call to https://api.sunrisesunset.io
 // TODO: add more error handling
 // TODO: hide api key
+// TODO: check UTC offset
 export async function fetchSunriseSunsetData(lat, lng) {
     try {
       const response = await fetch(
