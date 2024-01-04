@@ -1,5 +1,6 @@
 // Make an API call to https://api.geocodify.com
 // TODO: hide api key and replace the existing that was pushed to github
+// TODO: implement autocomplete from the geocodify api
 export async function getCoordinatesFromAddress(address) {
   try {
     const response = await fetch(

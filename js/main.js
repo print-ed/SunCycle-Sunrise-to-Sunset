@@ -2,6 +2,8 @@ import { fetchSunriseSunsetData } from "./api/sunriseSunsetData.js";
 import { getCoordinatesFromAddress } from "./api/geocoding.js";
 import { displayError, handleAPIError } from "./errorHandlers.js";
 
+// TODO: Refactor the displayed contents and error messages
+
 // Get the DOM elements
 const addressInput = document.getElementById("addressInput");
 const searchButton = document.getElementById("searchButton");
