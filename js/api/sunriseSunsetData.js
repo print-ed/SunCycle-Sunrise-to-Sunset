@@ -4,12 +4,13 @@
 export async function fetchSunriseSunsetData(lat, lng) {
     try {
       const response = await fetch(
-        // Replace with your sunrise-sunset API endpoint and key
+        // No need for an API key here
         `https://api.sunrisesunset.io/json?lat=${lat}&lng=${lng}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
+        // Get data from the response and return it
         const data = await response.json();
         return data;
       }
