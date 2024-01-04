@@ -14,6 +14,8 @@ export async function getCoordinatesFromAddress(address) {
     } else {
       // Get data from the response and coordinates from the data
       const data = await response.json();
+      // TODO: remove console.log
+      console.log("Geocodify API response:", data);
       const coordinates = data.response.features[0].geometry.coordinates;
       // Return the coordinates and location output
       return {
