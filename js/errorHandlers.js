@@ -6,12 +6,16 @@ const ErrorMessages = {
     "No coordinates found for the given address.",
 };
 
+// Handle errors from API calls
 export function handleAPIError(error, errorCallback) {
   console.error("API Error:", error);
 
+  // Get the error message
   let errorMessage = getErrorMessage(error);
+  // Get the user-friendly error message
   let userFriendlyMessage = ErrorMessages[errorMessage] || errorMessage;
 
+  // Call the error callback
   if (errorCallback && typeof errorCallback === "function") {
     errorCallback(userFriendlyMessage);
   } else {
@@ -19,6 +23,7 @@ export function handleAPIError(error, errorCallback) {
   }
 }
 
+// Get the error message from an error object
 function getErrorMessage(error) {
   if (error instanceof Error) {
     return error.message;
@@ -29,6 +34,7 @@ function getErrorMessage(error) {
   }
 }
 
+// Display an error message to the user
 export function displayError(message) {
   sunriseTime.textContent = "";
   sunsetTime.textContent = "";
