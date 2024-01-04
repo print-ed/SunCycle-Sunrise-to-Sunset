@@ -8,7 +8,7 @@ const ErrorMessages = {
 
 // Handle errors from API calls
 export function handleAPIError(error, errorCallback) {
-  console.error("API Error:", error);
+  // console.error("API Error:", error);
 
   // Get the error message
   let errorMessage = getErrorMessage(error);
