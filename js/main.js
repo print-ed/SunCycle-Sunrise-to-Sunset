@@ -28,16 +28,17 @@ function displaySunriseSunsetData(data) {
     sunriseTime.textContent = data.results.sunrise;
     sunsetTime.textContent = data.results.sunset;
   } else {
-    displayError("No data available for this location.");
+    displayError("No sunrise and sunset data available for this location.");
   }
 }
 
 function displayError(message) {
-  sunriseTime.textContent = message;
-  sunsetTime.textContent = message;
+  sunriseTime.textContent = "";
+  sunsetTime.textContent = "";
+  output.textContent = message;
 }
 
 function handleAPIError(error) {
   console.error("API Error:", error);
-  displayError("An error occurred while fetching data.");
+  displayError("An error occurred while fetching data. Please try again later.");
 }
